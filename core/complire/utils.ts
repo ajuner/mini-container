@@ -302,22 +302,6 @@ const generateNode = (node, state, asset, nextNode) => {
   if (typeof node === "string") {
     let compiled = compileExpression(node, "text");
     return `${compiled}`;
-  } else if (node.name === "template") {
-    const { is, name } = node.attributes;
-    if (is) {
-      return `$template$${is}$`;
-    } else {
-      let code = node.children
-        .map((item) => generateNode(item, state, asset, null))
-        .join("\n");
-      state.blocks[name] = code;
-      return null;
-    }
-  } else if (node.name === "slot") {
-    const { name } = node.attributes;
-    if (name) {
-      return `$slot$${name}$`;
-    }
   } else {
     let code = `<${titleCase(node.name)} `;
     code += generateProps(node, state, asset);
@@ -330,11 +314,6 @@ const generateNode = (node, state, asset, nextNode) => {
     }
 
     code += `</${titleCase(node.name)}>`;
-    if (Object.keys(node.attributes).indexOf("slot") > -1) {
-      // slot
-      state.blocks[node.attributes.slot] = code;
-      return null;
-    }
 
     if (node.name === "import") {
       return "";

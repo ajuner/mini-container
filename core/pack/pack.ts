@@ -54,14 +54,7 @@ export const packWxml = (fileNode) => {
 const wiredBlock = (blocks, fileNode) => {
   for (let key in blocks) {
     let value = blocks[key];
-    if (isNaN(+key)) {
-      fileNode.out =
-        fileNode.out
-          .replace(`$template$${key}$`, value)
-          .replace(`$slot$${key}$`, value) || "";
-    } else {
-      fileNode.out += value || "";
-    }
+    fileNode.out += value || "";
   }
 };
 
