@@ -1,0 +1,3 @@
+<!--pages/page2/index.wxml-->
+<button bind:tap="getBatteryInfo">get</button>
+<text>当前设备电量：{{num}}</text>

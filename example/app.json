@@ -1,0 +1,29 @@
+{
+  "pages": ["pages/page1/index", "pages/page2/index"],
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "rgb(200,200,200)",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "iconPath": "image/icon_API.png",
+        "selectedIconPath": "image/icon_API_HL.png",
+        "pagePath": "pages/page1/index",
+        "text": "组件"
+      },
+      {
+        "iconPath": "image/icon_API.png",
+        "selectedIconPath": "image/icon_API_HL.png",
+        "pagePath": "pages/page2/index",
+        "text": "组件2"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  }
+}

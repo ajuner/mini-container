@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "CommonJS",
+    "outDir": "dist",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "types": [
+      "node",
+    ],
+  },
+  "include": [
+    "core/*",
+  ],
+  "ts-node": {
+    "transpileOnly": true,
+    "compilerOptions": {
+      "skipLibCheck": true
+    },
+    "moduleTypes": {
+      "**/*": "cjs"
+    }
+  }
+}

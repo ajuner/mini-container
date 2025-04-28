@@ -1,0 +1,31 @@
+{
+  "name": "mini-container",
+  "version": "1.0.0",
+  "repository": "https://github.com/ajuner/mini-container",
+  "author": "ajuner",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "node ./scripts/index.js -e ./example -w",
+    "dev": "tauri dev",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "commander": "^13.1.0",
+    "esbuild": "^0.25.3",
+    "execa": "^5.1.1",
+    "express": "^5.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-opener": "^2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.2",
+    "@tauri-apps/cli": "^2"
+  }
+}
