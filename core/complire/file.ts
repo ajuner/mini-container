@@ -1,6 +1,7 @@
 import { dirname, resolve } from "path";
 import { build } from "esbuild";
 import { generate, lex, parse } from "./utils";
+import postcss from "postcss";
 
 let nodeNum = 0;
 
@@ -82,8 +83,19 @@ export class WxssFileNode extends FileNode {
   }
   async transform(input) {
     this.ast = input;
-    // 可以做一些转换
-    this.code = this.ast;
+    const that = this;
+    const res = await postcss([
+      require("postcss-import")({
+        resolve(id) {
+          const url = resolve(that.path, "../", id);
+          return url;
+        },
+      }),
+    ]).process(input, {
+      from: that.path,
+      to: that.path,
+    });
+    this.code = res.css;
   }
 }
 

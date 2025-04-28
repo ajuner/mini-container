@@ -19,6 +19,7 @@
     "execa": "^5.1.1",
     "express": "^5.1.0",
     "postcss": "^8.5.3",
+    "postcss-import": "^16.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },

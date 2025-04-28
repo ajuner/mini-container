@@ -1,14 +1,18 @@
+import { test } from "./test.js";
 
 Page({
   data: {
-    arr: [0]
+    arr: [0],
   },
   onLoad(options) {
     console.log(1, options);
   },
   add() {
     this.setData({
-      arr: this.data.arr.concat([this.data.arr.length])
-    })
-  }
-})
+      arr: this.data.arr.concat([this.data.arr.length]),
+    });
+  },
+  test() {
+    test();
+  },
+});
