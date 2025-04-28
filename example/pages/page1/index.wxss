@@ -1,1 +1,4 @@
 /* pages/page1/index.wxss */
+.wrap {
+  padding: 20px;
+}

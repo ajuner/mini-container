@@ -80,8 +80,10 @@ export class WxssFileNode extends FileNode {
     super(path, type, name, tag);
     this.type = "wxss";
   }
-  transform(input) {
+  async transform(input) {
     this.ast = input;
+    // 可以做一些转换
+    this.code = this.ast;
   }
 }
 

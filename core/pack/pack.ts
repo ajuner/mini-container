@@ -66,7 +66,7 @@ const wiredBlock = (blocks, fileNode) => {
 };
 
 export const packWxss = (fileNode) => {
-  return "";
+  return fileNode.code;
 };
 
 export const packBerial = async (fileNode, options) => {

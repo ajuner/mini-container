@@ -11,21 +11,22 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-opener": "^2",
     "chokidar": "^4.0.3",
     "commander": "^13.1.0",
     "esbuild": "^0.25.3",
     "execa": "^5.1.1",
     "express": "^5.1.0",
+    "postcss": "^8.5.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3",
-    "@tauri-apps/api": "^2",
-    "@tauri-apps/plugin-opener": "^2"
+    "typescript": "^5.8.3"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "devDependencies": {
-    "@types/node": "^22.15.2",
-    "@tauri-apps/cli": "^2"
+    "@tauri-apps/cli": "^2",
+    "@types/node": "^22.15.2"
   }
 }
