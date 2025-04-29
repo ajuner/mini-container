@@ -1,7 +1,11 @@
+import "./component";
+
 const app = { graph: null };
+
 function getIns() {
   return app.graph;
 }
+
 function $for(arr, fn, key) {
   arr = arr || [];
   return arr.map((item, index) => {
@@ -10,6 +14,7 @@ function $for(arr, fn, key) {
     return vdom;
   });
 }
+
 function $handleEvent(name, id, custom) {
   const ins = getIns(id);
   const method = ins[name] || (ins.methods || {})[name] || function () {};
@@ -24,33 +29,7 @@ function $handleEvent(name, id, custom) {
     method.call(ins, e);
   };
 }
-var comp = {
-  View: "div",
-  Text: "span",
-  Button: (props) => {
-    const { onClick, children } = props;
-    return React.createElement(
-      "button",
-      {
-        className: "wx-button",
-        style: {
-          width: "100%",
-          border: "1px solid rgba(0, 0, 0, 0.2)",
-          backgroundColor: "#f8f8f8",
-          borderRadius: "5px",
-          boxSizing: "border-box",
-          color: "#000",
-          display: "block",
-          fontSize: "18px",
-          lineHeight: "2.55555556",
-          textAlign: "center",
-        },
-        onClick: onClick,
-      },
-      children
-    );
-  },
-};
+
 var modules = {};
 var Page = (option) => {
   const page = new _Page(option, p.id);
@@ -129,7 +108,7 @@ let path = window.location.pathname;
 let p = "";
 const pages = manifest.pages;
 if (path === "/") {
-  p = pages[0];
+  window.location.href = window.location.origin + pages[0].path;
 } else {
   p = pages.find((i) => i.path === path);
 }

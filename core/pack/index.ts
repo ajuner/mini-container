@@ -1,7 +1,8 @@
 import { basename, join, resolve } from "path";
-import { packJs, packWxml, packWxss, packBerial } from "./pack";
-import { transform } from "esbuild";
+import { packJs, packWxml, packWxss, packManifest } from "./pack";
+import { transform, build } from "esbuild";
 import { promises } from "fs";
+import { lessLoader } from "esbuild-plugin-less";
 
 export const pack = async (allFileNode, options) => {
   await packFileNode(allFileNode, options);
@@ -63,7 +64,7 @@ const writeFileNode = async (fileNode, options) => {
 
   const childs = Array.from(fileNode.childFileNode.values()).map(
     async (page) => {
-      await packBerial(page, options);
+      await packManifest(page, options);
       await write(page, options);
     }
   );
@@ -121,8 +122,20 @@ const generateEntry = async (fileNode, options) => {
     join(resolve(options.o), "index.html"),
     await getIndexHtmlCode()
   );
-  const runtime = resolve("./runtime/runtime.js");
-  await promises.copyFile(runtime, join(resolve(options.o), "rumtime.js"));
+
+  await build({
+    entryPoints: [resolve("./runtime/runtime.js")],
+    bundle: true,
+    format: "cjs",
+    sourcemap: false,
+    write: true,
+    plugins: [
+      lessLoader({
+        cssInjection: true,
+      }),
+    ],
+    outdir: join(resolve(options.o)),
+  });
 };
 
 export async function getIndexHtmlCode() {
@@ -139,12 +152,13 @@ export async function getIndexHtmlCode() {
         padding: 0;
     }
     </style>
+    <link rel="stylesheet" href="/runtime.css">
 </head>
 <body>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="/app.js"></script>
-    <script src="/rumtime.js"></script>
+    <script src="/runtime.js"></script>
 </body>
 <script>
 var wx = {}

@@ -5,7 +5,7 @@
   "identifier": "com.tauri-app.app",
   "build": {
     "beforeDevCommand": "yarn start",
-    "devUrl": "http://localhost:8108/pages/page1/index",
+    "devUrl": "http://localhost:8108/",
     "beforeBuildCommand": "yarn build",
     "frontendDist": "../dist"
   },
@@ -18,7 +18,8 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": null,
+      "dangerousDisableAssetCspModification": true
     }
   },
   "bundle": {

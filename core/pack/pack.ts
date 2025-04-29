@@ -62,7 +62,7 @@ export const packWxss = (fileNode) => {
   return fileNode.code;
 };
 
-export const packBerial = async (fileNode, options) => {
+export const packManifest = async (fileNode, options) => {
   const edir = resolve(options.e);
 
   try {

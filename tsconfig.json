@@ -11,6 +11,7 @@
   },
   "include": [
     "core/*",
+    "runtime/*"
   ],
   "ts-node": {
     "transpileOnly": true,
