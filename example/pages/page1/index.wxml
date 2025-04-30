@@ -1,4 +1,7 @@
 <!--pages/page1/index.wxml-->
-<view class="wrap">{{arr}}</view><view wx:for="{{arr}}"><text>{{item}}:{{index}}</text></view>
-<view wx:if="{{arr.length > 3}}"> show </view>
+<view class="wrap">{{arr.length}}</view>
+<view wx:for="{{arr}}">
+    <text>{{item.a}}:{{item.b}}:{{index}}</text>
+</view>
+<view wx:if="{{arr.length > 3}}">show</view>
 <button bind:tap="add">add</button>

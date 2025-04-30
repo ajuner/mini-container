@@ -38,10 +38,7 @@ export const server = (options) => {
     console.log("socket.io listening on *:8109");
   });
   io.on("connection", (socket) => {
-    console.log("a user connected");
-    socket.on("disconnect", () => {
-      console.log("user disconnected");
-    });
+    socket.on("disconnect", () => {});
   });
 
   app.reloadEnd = () => {
@@ -50,7 +47,7 @@ export const server = (options) => {
 
   app.reloadStart = () => {
     io.emit("reload-start");
-  }
+  };
 
   return app;
 };
