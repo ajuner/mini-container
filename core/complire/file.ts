@@ -3,7 +3,9 @@ import { build } from "esbuild";
 import { generate, lex, parse } from "./utils";
 import postcss from "postcss";
 
-let nodeNum = 0;
+export const nodeNum = {
+  num: 0,
+};
 
 const exts = {
   ".js": ".js",
@@ -30,7 +32,7 @@ export class FileNode {
     this.ast = {};
     this.path = path;
     this.tag = tag;
-    this.id = nodeNum++;
+    this.id = nodeNum.num++;
     this.name = name;
     this.ext = exts[type];
     this.type = type.slice(1);

@@ -64,7 +64,6 @@ export const packWxss = (fileNode) => {
 
 export const packManifest = async (fileNode, options) => {
   const edir = resolve(options.e);
-
   try {
     var { code } = await transform(fileNode.output.jsx, {
       jsxFactory: "React.createElement",
@@ -84,7 +83,7 @@ export const packManifest = async (fileNode, options) => {
 
   const prefix = options.p ? options.p : "/";
   const hash = prefix + String(fileNode.id);
-  manifest.push({
+  manifest.list.push({
     id: fileNode.id,
     info: fileNode.ast,
     scripts: [fileNode.output.js, fileNode.output.jsx],

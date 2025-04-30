@@ -4,7 +4,12 @@ import { transform, build } from "esbuild";
 import { promises } from "fs";
 import { lessLoader } from "esbuild-plugin-less";
 
+export const manifest = {
+  list: [],
+};
+
 export const pack = async (allFileNode, options) => {
+  manifest.list = [];
   await packFileNode(allFileNode, options);
   await writeFileNode(allFileNode, options);
 
@@ -84,12 +89,9 @@ const write = async (fileNode, options) => {
         minify: true,
       });
     }
-
     await promises.writeFile(path, code);
   }
 };
-
-export const manifest = [];
 
 const generateEntry = async (fileNode, options) => {
   const o = resolve(options.o);
@@ -106,9 +108,8 @@ const generateEntry = async (fileNode, options) => {
     item.selectedIconPath = "/public/" + basename(selectedIconPath);
   });
   await Promise.all(all);
-
   const pages = fileNode.ast.pages.map((path) =>
-    manifest.find((i) => i.path === "/" + path)
+    manifest.list.find((i) => i.path === "/" + path)
   );
   const json = {
     origin: fileNode.ast,

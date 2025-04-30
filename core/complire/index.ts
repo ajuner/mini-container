@@ -1,7 +1,10 @@
 import { extname, resolve } from "path";
 import { promises } from "fs";
+import { nodeNum } from "./file";
 
 export const compile = async (options) => {
+  nodeNum.num = 0;
+
   const { e } = options;
 
   const entry = resolve(e + "/app.json");
@@ -21,7 +24,7 @@ const loadFile = async (options, file) => {
     file.outputPath = resolve(options.o, String(file.id));
   }
 
-  let siblings: Promise<void>[] = []
+  let siblings: Promise<void>[] = [];
 
   if (file.type === "json" && file.parent) {
     siblings = [".wxml", ".js", ".wxss"].map(async (type) => {

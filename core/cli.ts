@@ -5,6 +5,8 @@ import { pack } from "./pack";
 import commander from "./commander";
 import { resolve } from "path";
 
+let ser;
+
 async function run(commander) {
   const options = {
     e: commander.entry,
@@ -23,17 +25,18 @@ async function run(commander) {
           pollInterval: 500,
         },
       })
-      .on("change", () => {
-        console.log('change');
-        rebuild(options);
+      .on("change", async () => {
+        ser.reloadStart?.();
+        await rebuild(options);
+        ser.reloadEnd?.();
       });
   }
 
-  server(options);
+  ser = server(options);
 }
 
-function rebuild(options) {
-  start(options);
+async function rebuild(options) {
+  await start(options);
 }
 
 async function start(options) {

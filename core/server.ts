@@ -31,5 +31,26 @@ export const server = (options) => {
     console.log(`start:http://localhost:${port}`);
   });
 
-  return app.server;
+  // 建立一个8108 socket链接来实现热更新
+  const http = require("http").createServer(app);
+  const io = require("socket.io")(http);
+  http.listen(8109, () => {
+    console.log("socket.io listening on *:8109");
+  });
+  io.on("connection", (socket) => {
+    console.log("a user connected");
+    socket.on("disconnect", () => {
+      console.log("user disconnected");
+    });
+  });
+
+  app.reloadEnd = () => {
+    io.emit("reload-end");
+  };
+
+  app.reloadStart = () => {
+    io.emit("reload-start");
+  }
+
+  return app;
 };

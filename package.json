@@ -21,6 +21,8 @@
     "express": "^5.1.0",
     "postcss": "^8.5.3",
     "postcss-import": "^16.1.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
