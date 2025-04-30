@@ -1,11 +1,7 @@
 import "./component";
 import { wrap } from "./component/wrap";
 
-const app = { graph: null };
-
-function getIns() {
-  return app.graph;
-}
+const pageGraph = {};
 
 function $for(arr, fn, key) {
   arr = arr || [];
@@ -17,7 +13,7 @@ function $for(arr, fn, key) {
 }
 
 function $handleEvent(name, id, custom) {
-  const ins = getIns(id);
+  const ins = pageGraph[id];
   const method = ins[name] || (ins.methods || {})[name] || function () {};
   ins.eventMap[custom] = name;
   return (e) => {
@@ -31,11 +27,10 @@ function $handleEvent(name, id, custom) {
   };
 }
 
-var modules = {};
 var Page = (option) => {
-  const page = new _Page(option, p.id);
-  app.graph = page;
+  pageGraph[p.id] = new _Page(option, p.id);
 };
+
 var global = {
   modules: {},
   Page,
@@ -66,7 +61,6 @@ function execScript(path, ref) {
   const executeCode = new Function(
     "module",
     "Page",
-    "app",
     "useEffect",
     "$for",
     "$handleEvent",
@@ -80,7 +74,6 @@ function execScript(path, ref) {
     module.exports,
     module,
     Page2,
-    app,
     useEffect2,
     $for2,
     $handleEvent,
@@ -126,7 +119,7 @@ const tabBar = manifest.origin.tabBar;
 
 ReactDOM.render(
   React.createElement(wrap, {
-    app,
+    page: pageGraph[id],
     tabBar,
     path,
     manifest,

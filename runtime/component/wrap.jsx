@@ -1,21 +1,19 @@
 import socket from "socket.io-client";
 
 export const wrap = (props) => {
-  const { app, manifest, tabBar, Comp, path } = props;
-
-  const page = app.graph;
+  const { page, manifest, tabBar, Comp, path } = props;
 
   const [show, setShow] = React.useState(false);
 
   React.useLayoutEffect(() => {
-    page.onShow && page.onShow();
+    page.onLoad && page.onLoad();
     return () => {
-      page.onHide && page.onHide();
+      page.onUnload && page.onUnload();
     };
   }, []);
 
   React.useEffect(() => {
-    page.onLoad && page.onLoad();
+    page.onShow && page.onShow();
     // 建立一个 socket.io 链接
     const socketUrl = window.location.origin.replace(/:\d+/, ":8109");
     const io = socket(socketUrl, {
@@ -38,11 +36,11 @@ export const wrap = (props) => {
     io.connect();
 
     return () => {
-      page.unLoad && page.unLoad();
+      page.onHide && page.onHide();
       io.disconnect();
     };
   }, []);
-  console.log(page.data);
+
   return (
     <>
       <Comp data={page.data} />
