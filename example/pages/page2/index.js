@@ -11,6 +11,9 @@ Page({
     });
   },
   onLoad() {
-    this.getBatteryInfo();
+    console.log("onload");
   },
+  onShow() {
+    console.log("onshow");
+  }
 });

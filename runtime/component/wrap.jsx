@@ -7,6 +7,13 @@ export const wrap = (props) => {
 
   const [show, setShow] = React.useState(false);
 
+  React.useLayoutEffect(() => {
+    page.onShow && page.onShow();
+    return () => {
+      page.onHide && page.onHide();
+    };
+  }, []);
+
   React.useEffect(() => {
     page.onLoad && page.onLoad();
     // 建立一个 socket.io 链接
